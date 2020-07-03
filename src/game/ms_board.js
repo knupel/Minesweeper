@@ -12,8 +12,12 @@ function set_grid(x, y) {
       count++;
       let cell = {
         id: count,
+        // not the col and row is necessary,
+        // with the id, width and height we should be catch the position
         col: i,
         row: j,
+        width: x,
+        height: y,
         type: 'empty',
         is: true,
       };
@@ -24,12 +28,14 @@ function set_grid(x, y) {
 }
 
 function grid(x, y) {
-  if (data_board[0] === undefined) {
-    set_grid(x, y);
-    console.log('tout à faire');
-  }
   const list = data_board.map((elem) => (
-    <MSCell key={elem.id} show={elem.is} />
+    <MSCell
+      key={elem.id}
+      id={elem.id}
+      show={elem.is}
+      width={elem.width}
+      height={elem.height}
+    />
   ));
   return list;
 }
@@ -41,10 +47,17 @@ export class MSBoard extends React.Component {
       // history: 0,
     };
   }
+
   render() {
+    // setting
+    if (data_board[0] === undefined) {
+      console.log('set grid');
+      set_grid(this.props.x, this.props.y);
+    }
     return (
       <div>
-        {this.props.name} {grid(this.props.x, this.props.y)}
+        {this.props.name}
+        {grid(this.props.x, this.props.y)}
       </div>
     );
   }
