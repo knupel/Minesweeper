@@ -13,8 +13,8 @@ export class MineSweeperGame extends React.Component {
       <div>
         <MSBoard
           name={this.props.name}
-          x={this.props.rows}
-          y={this.props.cols}
+          width={this.props.width}
+          height={this.props.height}
         />
         <p>
           ROWS {this.props.x} COLS {this.props.y}
