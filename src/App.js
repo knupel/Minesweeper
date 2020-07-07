@@ -1,11 +1,12 @@
 import React from 'react';
 import { MineSweeperGame } from './game/ms_game';
+import { MineSweeperHeader } from './game/ms__header';
 
 export function MineSweeper() {
   return (
     <div>
-      <MineSweeperGame name="MSBG 32" width="10" height="5" mines="20" />
-      {/* <MineSweeperGame name="MSBG 31" /> */}
+      <MineSweeperHeader />
+      <MineSweeperGame name="SUPA DEMINEUR" width="10" height="5" mines="20" />
     </div>
   );
 }

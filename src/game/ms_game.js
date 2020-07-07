@@ -11,15 +11,16 @@ export class MineSweeperGame extends React.Component {
   render() {
     return (
       <div>
-        <MSBoard
-          name={this.props.name}
-          width={this.props.width}
-          height={this.props.height}
-        />
         <p>
-          ROWS {this.props.x} COLS {this.props.y}
+          {this.props.name}
+          {' width: '}
+          {this.props.width}
+          {' height: '}
+          {this.props.height}
+          {' Mines: '}
+          {this.props.mines}
         </p>
-        <p>MINES {this.props.mines}</p>
+        <MSBoard width={this.props.width} height={this.props.height} />
       </div>
     );
   }

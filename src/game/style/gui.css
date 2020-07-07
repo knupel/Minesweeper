@@ -1,0 +1,19 @@
+.button {
+  z-index: 1;
+  font-family: helvetica;
+  font-size: 12px;
+  color: red;
+}
+
+.frame {
+  z-index: 2;
+
+  height: 100px;
+  width: 100px;
+  top: 40px;
+  left: 40px;
+  font-family: tokyo;
+  font-size: 36px;
+  color: magenta;
+  background: yellow;
+}

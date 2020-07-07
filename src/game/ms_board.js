@@ -4,22 +4,16 @@ import { MSCell } from './ms_cell';
 let data_board = [];
 
 function set_grid(width, height) {
-  let num = width * height;
   let count = 0;
   let header = [Number(width), Number(height)];
   data_board.push(header);
-  console.log('cellules', num);
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
       count++;
       let cell = {
         id: count,
-        // not the col and row is necessary,
-        // with the id, width and height we should be catch the position
-        col: i,
-        row: j,
-        width: width,
-        height: height,
+        x: i,
+        y: j,
         type: 'empty',
         is: true,
       };
@@ -66,7 +60,6 @@ export class MSBoard extends React.Component {
   render() {
     // setting
     if (data_board[0] === undefined) {
-      console.log('set grid');
       set_grid(this.props.width, this.props.height);
     }
     return (
