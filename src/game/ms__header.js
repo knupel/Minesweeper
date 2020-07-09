@@ -1,48 +1,65 @@
 import React from 'react';
 import './style/gui.css';
 
-class GUI extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      is: this.props.is,
-    };
-    this.update = this.update.bind(this);
-  }
+function Menu(props) {
+  return <button onClick={props.update}>{props.name}</button>;
+}
 
-  update() {
-    this.setState((prevState) => {
-      return {
-        is: !prevState.is,
-      };
-    });
-  }
+class MenuBar extends React.Component {
+  // show_menu(which_one) {
+  //   return (
+  //     <Menu
+  //       name={this.props.list_menu[which_one]}
+  //       update={() => this.props.update(which_one)}
+  //     />
+  //   );
+  // }
 
-  gui_frame() {
-    let res = [];
-    if (this.state.is) {
-      res.push(<div className="frame">{this.props.content.a}</div>);
-    }
-    return res;
-  }
-  // render
   render() {
-    return (
-      <button onClick={this.update} className="button">
-        {this.props.name}
-        {this.gui_frame()}
-      </button>
-    );
+    return <div>{set_menu_bar(this.props, 0)}</div>;
   }
 }
 
+class MenuBarManager extends React.Component {
+  render() {
+    return <MenuBar data={this.props.data} />;
+  }
+}
+
+export function MineSweeperHeader() {
+  return <MenuBarManager data={gui_data} />;
+}
+
+/**
+ * UTILS
+ */
+function set_menu_bar(props, which_one) {
+  return props.data.map((elem) => (
+    // return gui_data.map((elem) => (
+    <Menu
+      key={elem.id}
+      name={elem.name}
+      // is={elem.is}
+      update={() => props.update(which_one)}
+      // content={{
+      //   a: elem.content.a,
+      // }}
+    />
+  ));
+}
+
+/**
+ * DATA
+ */
 let gui_data = [
   {
     id: 0,
     is: false,
     name: 'Game',
     content: {
-      a: `machin`,
+      a: `easy`,
+      b: `medium`,
+      c: `hard`,
     },
   },
   {
@@ -78,26 +95,3 @@ let gui_data = [
     },
   },
 ];
-
-// end of class
-function set_menu() {
-  const menu = gui_data.map((elem) => (
-    <GUI
-      key={elem.id}
-      name={elem.name}
-      is={elem.is}
-      content={{
-        a: elem.content.a,
-      }}
-    />
-  ));
-  return menu;
-}
-let menu;
-export function MineSweeperHeader() {
-  if (menu === undefined) {
-    menu = set_menu();
-  }
-
-  return <div>{menu}</div>;
-}
