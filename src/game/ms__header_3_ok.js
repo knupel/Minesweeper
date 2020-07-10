@@ -2,20 +2,11 @@ import React from 'react';
 import './style/gui.css';
 
 function Menu(props) {
-  // let res = [];
-  if (props.is) {
-    return (
-      <button className="menu" onClick={props.onClick}>
-        {'X'}
-      </button>
-    );
-  } else {
-    return (
-      <button className="menu_selected" onClick={props.onClick}>
-        {'O'}
-      </button>
-    );
-  }
+  return (
+    <button className="menu" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class MenuBar extends React.Component {
@@ -32,7 +23,7 @@ class MenuBar extends React.Component {
     console.log('MenuBar: show_menu(', which_one, ')');
     return (
       <Menu
-        is={this.props.list_menu_bar[which_one]}
+        value={this.props.list_menu_bar[which_one]}
         onClick={() => this.props.update(which_one)}
       />
     );
@@ -47,8 +38,9 @@ class MenuBarManager extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: Array(props.data.length).fill(false),
+      content: Array(props.data.length).fill('X'),
       step_num: 0,
+      is: false,
     };
   }
 
@@ -56,14 +48,15 @@ class MenuBarManager extends React.Component {
     console.log('MenuBarManager: update(', which_one, ')');
     const temp_list = this.state.content.slice();
     for (let i = 0; i < temp_list.length; i++) {
-      temp_list[i] = false;
+      temp_list[i] = 'X';
     }
 
-    if (temp_list[which_one] === false) {
+    if (temp_list[which_one] === 'X') {
       this.setState({
         content: temp_list,
+        is: !this.state.is,
       });
-      temp_list[which_one] = true;
+      temp_list[which_one] = 'O';
     }
   }
 
