@@ -6,7 +6,7 @@ export function MineSweeper() {
   return (
     <div>
       <MineSweeperHeader />
-      <MineSweeperGame name="SUPA DEMINEUR" width="10" height="5" mines="20" />
+      {/* <MineSweeperGame name="SUPA DEMINEUR" width="10" height="5" mines="20" /> */}
     </div>
   );
 }
