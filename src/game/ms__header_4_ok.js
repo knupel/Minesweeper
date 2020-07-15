@@ -2,22 +2,22 @@ import React from 'react';
 import './style/gui.css';
 
 function Menu(props) {
+  // let res = [];
   if (props.is) {
     return (
       <button className="menu" onClick={props.onClick}>
-        {props.name}
+        {'X'}
       </button>
     );
   } else {
     return (
       <button className="menu_selected" onClick={props.onClick}>
-        {props.name}
+        {'O'}
       </button>
     );
   }
 }
 
-// MENU BAR
 class MenuBar extends React.Component {
   show_menu_bar() {
     let res = [];
@@ -29,11 +29,11 @@ class MenuBar extends React.Component {
   }
 
   show_menu(which_one) {
+    console.log('MenuBar: show_menu(', which_one, ')');
     return (
       <Menu
         is={this.props.list_menu_bar[which_one]}
         onClick={() => this.props.update(which_one)}
-        name={this.props.content[which_one].name}
       />
     );
   }
@@ -43,27 +43,25 @@ class MenuBar extends React.Component {
   }
 }
 
-// MENU BAR MANAGER
 class MenuBarManager extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bar: Array(props.data.length).fill(false),
+      content: Array(props.data.length).fill(false),
       step_num: 0,
     };
-    this.content = props.data;
   }
 
   update(which_one) {
     console.log('MenuBarManager: update(', which_one, ')');
-    const temp_list = this.state.bar.slice();
+    const temp_list = this.state.content.slice();
     for (let i = 0; i < temp_list.length; i++) {
       temp_list[i] = false;
     }
 
     if (temp_list[which_one] === false) {
       this.setState({
-        bar: temp_list,
+        content: temp_list,
       });
       temp_list[which_one] = true;
     }
@@ -73,8 +71,7 @@ class MenuBarManager extends React.Component {
     return (
       <div className="menu_bar">
         <MenuBar
-          list_menu_bar={this.state.bar}
-          content={this.content}
+          list_menu_bar={this.state.content}
           update={(local_index_use) => this.update(local_index_use)}
         />
       </div>
@@ -85,6 +82,22 @@ class MenuBarManager extends React.Component {
 export function MineSweeperHeader() {
   return <MenuBarManager data={gui_data} />;
 }
+
+/**
+ * UTILS
+ */
+// function set_menu_bar(props) {
+//   return props.data.map((elem) => (
+//     <Menu
+//       key={elem.id}
+//       name={elem.name}
+//       is={elem.is}
+//       content={{
+//         a: elem.content.a,
+//       }}
+//     />
+//   ));
+// }
 
 /**
  * DATA
