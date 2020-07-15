@@ -10,18 +10,10 @@ function Menu(props) {
     );
   } else {
     return (
-      <button className="menu selected" onClick={props.onClick}>
+      <button className="menu_selected" onClick={props.onClick}>
         {props.name}
       </button>
     );
-  }
-}
-
-function MenuFrame(props) {
-  if (props.is) {
-    return <div className="frame"></div>;
-  } else {
-    return <div></div>;
   }
 }
 
@@ -29,33 +21,14 @@ function MenuFrame(props) {
 class MenuBar extends React.Component {
   show_menu_bar() {
     let res = [];
-    console.log('MenuBar: tous à la barra');
+    console.log('MenuBar: aux suivants');
     for (let i = 0; i < this.props.list_menu_bar.length; i++) {
-      res.push(this.menu(i));
+      res.push(this.show_menu(i));
     }
     return res;
   }
 
-  show_menu_frame() {
-    let res = [];
-    console.log('MenuBar: tous à la fenêtre');
-    for (let i = 0; i < this.props.list_menu_bar.length; i++) {
-      res.push(this.menu_frame(i));
-    }
-    return res;
-  }
-
-  // component
-  menu_frame(which_one) {
-    return (
-      <MenuFrame
-        is={this.props.list_menu_bar[which_one]}
-        onClick={() => this.props.update(which_one)}
-      />
-    );
-  }
-
-  menu(which_one) {
+  show_menu(which_one) {
     return (
       <Menu
         is={this.props.list_menu_bar[which_one]}
@@ -66,12 +39,7 @@ class MenuBar extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div>{this.show_menu_bar()}</div>
-        <div>{this.show_menu_frame()}</div>
-      </div>
-    );
+    return <div>{this.show_menu_bar()}</div>;
   }
 }
 

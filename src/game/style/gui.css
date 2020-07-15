@@ -1,45 +1,29 @@
 body {
   margin: 20px;
 }
-
 .menu {
   font-family: tokyo;
   font-size: 20px;
   text-align: center;
+  height: 50px;
+  width: 200px;
+  /* position: absolute; */
+  position: relative;
   color: yellow;
   background: magenta;
-  height: 50px;
-  width: 200px;
 }
 
-.menu_selected {
-  font-family: tokyo;
-  font-size: 20px;
-  text-align: center;
+.selected {
   color: magenta;
   background: yellow;
-  height: 50px;
-  width: 200px;
-}
-
-.menu:focus {
-  outline: none;
-}
-
-.menu_bar {
-  display: flex;
-  flex-direction: row;
 }
 
 .frame {
-  z-index: 2;
-
+  z-index: 1;
   height: 100px;
   width: 100px;
-  top: 40px;
+  top: 100px;
   left: 40px;
-  font-family: tokyo;
-  font-size: 36px;
-  color: magenta;
-  background: yellow;
+  background: cyan;
+  position: relative;
 }
